@@ -1,0 +1,12 @@
+body,#paper{
+    position:relative;
+}
+
+.block{
+    background:#eee;
+    border:1px solid silver;
+}
+
+.tank{
+    background-color:red;
+}
