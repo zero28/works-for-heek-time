@@ -1,5 +1,5 @@
-B_WIDTH = 42
-B_HEIGHT = 42
+B_WIDTH = 40
+B_HEIGHT = 40
 
 var root;
 var blocks = new Array();
@@ -10,8 +10,8 @@ bom = new Array()
 $(document).ready(function(){
     root = $("#paper");
     draw_block(15,10);
-    add_tank(0,0);
-    add_tank(5,5);
+    add_tank(0,0,"red");
+    add_tank(5,5,"blue");
     add_action("39",function(){move(tanks[0],0,1)});
     add_action("37",function(){move(tanks[0],0,-1)});
     add_action("38",function(){move(tanks[0],-1,0)});
@@ -45,9 +45,10 @@ function draw_block(num_h,num_v){
     }
 }
 
-function add_tank(i,j){
+function add_tank(i,j,col){
     this_id = "t-"+tanks.length;
     root.append('<div class="tank" id="'+this_id+'"></div>');
+    $("#"+this_id).css("background-color",col);
     var self = $("#"+this_id);
     self.h = i;
     self.v = j;
