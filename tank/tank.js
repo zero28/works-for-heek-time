@@ -2,6 +2,7 @@ B_WIDTH = 40
 B_HEIGHT = 40
 
 var root;
+var debug;
 var blocks = new Array();
 var tanks = new Array();
 var dx = new Array(0,-1,0,1);
@@ -33,6 +34,11 @@ $(document).ready(function(){
 function draw_block(num_h,num_v){
     var i,j;
     root.width(num_h*B_WIDTH).height(num_v*B_HEIGHT);
+//	root.append('<div id="fordebug"></div>');
+//	debug=$("#fordebug");
+//	debug.offset({
+//	top:422,left:555});
+//	debug.html("123");
     root.offset({"top":(window.innerHeight-num_v*B_HEIGHT)/2,
                 "left":(window.innerWidth-num_h*B_WIDTH)/2});
     offset0 = $("#paper").offset();
@@ -63,7 +69,6 @@ function add_tank(i,j,col){
 			{top:offset0.top + i*B_HEIGHT +15,
 			 left:offset0.left + j*B_WIDTH +15, });
 	self.gun.width("3").height("30");
-//    var self = $("#"+this_id);
     self.h = i;
     self.v = j;
     self.d = 1;
@@ -91,11 +96,26 @@ function updata(tank){
 function move(tank,dir){
 	var h=dx[dir];
 	var v=dy[dir];
+	var th,tv;
     if((tank.h+h<blocks.length)&&(tank.h+h>=0))
-        tank.h += h;
+        th = tank.h + h;
+	else 
+		th = tank.h;
     if((tank.v+v<blocks[tank.h].length)&&(tank.v+v>=0))
-        tank.v += v;
-    tank.d=dir;
+        tv = tank.v + v;
+	else
+		tv = tank.v;
+	for (t in tanks)
+	{
+		if (tanks[t].h == th && tanks[t].v == tv )
+		{
+			th = tank.h;
+			tv = tank.v;
+		}
+	}
+	tank.h = th;
+	tank.v = tv;
+    tank.d = dir;
     updata(tank);
 }
 
