@@ -4,7 +4,8 @@ B_HEIGHT = 40
 var root;
 var blocks = new Array();
 var tanks = new Array();
-
+var dx = new Array(0,-1,0,1);
+var dy = new Array(-1,0,1,0);
 bom = new Array()
 
 $(document).ready(function(){
@@ -12,15 +13,20 @@ $(document).ready(function(){
     draw_block(15,10);
     add_tank(0,0,"red");
     add_tank(5,5,"blue");
-    add_action("39",function(){move(tanks[0],0,1)});
-    add_action("37",function(){move(tanks[0],0,-1)});
-    add_action("38",function(){move(tanks[0],-1,0)});
-    add_action("40",function(){move(tanks[0],1,0)});
+/*
+    keycode   37 = Left
+	keycode   38 = Up
+	keycode   39 = Right
+	keycode   40 = Down*/
+    add_action("37",function(){move(tanks[0],0)});
+    add_action("38",function(){move(tanks[0],1)});
+    add_action("39",function(){move(tanks[0],2)});
+    add_action("40",function(){move(tanks[0],3)});
     
-    add_action("68",function(){move(tanks[1],0,1)});
-    add_action("65",function(){move(tanks[1],0,-1)});
-    add_action("87",function(){move(tanks[1],-1,0)});
-    add_action("83",function(){move(tanks[1],1,0)});
+    add_action("65",function(){move(tanks[1],0)});
+    add_action("87",function(){move(tanks[1],1)});
+    add_action("68",function(){move(tanks[1],2)});
+    add_action("83",function(){move(tanks[1],3)});
 
 })
 
@@ -48,10 +54,19 @@ function draw_block(num_h,num_v){
 function add_tank(i,j,col){
     this_id = "t-"+tanks.length;
     root.append('<div class="tank" id="'+this_id+'"></div>');
-    $("#"+this_id).css("background-color",col);
-    var self = $("#"+this_id);
+    $("#"+this_id+".tank").css("background-color",col);
+
+    root.append('<div class="gun" id="'+this_id+'"></div>');
+    var self =$("#"+this_id+".tank");
+    self.gun=$("#"+this_id+".gun");
+    self.gun.css("position","absolute").offset(
+			{top:offset0.top + i*B_HEIGHT +15,
+			 left:offset0.left + j*B_WIDTH +15, });
+	self.gun.width("3").height("30");
+//    var self = $("#"+this_id);
     self.h = i;
     self.v = j;
+    self.d = 1;
     updata(self);
     self.width(B_WIDTH).height(B_HEIGHT);
     tanks.push(self);
@@ -60,13 +75,27 @@ function add_tank(i,j,col){
 
 function updata(tank){
     tank.offset(blocks[tank.h][tank.v].offset());
+    var xby=15;
+	if (tank.d==1)xby=xby-30;
+	var yby=15;
+	if (tank.d==0)yby=yby-30;
+    tank.gun.css("position","absolute").offset(
+			{top:offset0.top + tank.h*B_HEIGHT + xby,
+			 left:offset0.left + tank.v*B_WIDTH + yby, });
+	if (tank.d==0||tank.d==2)
+		tank.gun.width("30").height("3");
+	if (tank.d==1||tank.d==3)
+		tank.gun.width("3").height("30");
 }
 
-function move(tank,h,v){
+function move(tank,dir){
+	var h=dx[dir];
+	var v=dy[dir];
     if((tank.h+h<blocks.length)&&(tank.h+h>=0))
         tank.h += h;
     if((tank.v+v<blocks[tank.h].length)&&(tank.v+v>=0))
         tank.v += v;
+    tank.d=dir;
     updata(tank);
 }
 

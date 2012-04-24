@@ -1,7 +1,11 @@
 body,#paper{
     position:relative;
 }
-
+.gun{
+	background:#ddd;
+	border:5px solid green;
+	background-color:green;
+}
 .block{
     background:#eee;
     border:1px solid silver;
