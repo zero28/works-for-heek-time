@@ -1,5 +1,6 @@
 var bullets = new Array();
 var bulletscount = 1;
+SPEED = 3;
 //root.append('<div id="debug"></div>');
 //var debug=$("#debug");
 //debug.html("123");
@@ -24,8 +25,8 @@ function shutting(tank)
 function move_bullet(self)
 {
 //	var self=$("#"+bulletid);
-	self.x+=dx[self.d];
-	self.y+=dy[self.d];
+	self.x+=dx[self.d]*SPEED;
+	self.y+=dy[self.d]*SPEED;
 	self.css("position","absolute").offset(
 		 	{top:offset0.top + self.x,
 			 left:offset0.left + self.y,});
