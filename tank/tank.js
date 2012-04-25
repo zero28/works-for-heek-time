@@ -1,7 +1,7 @@
 B_WIDTH = 40
 B_HEIGHT = 40
-SIZE_W = 15
-SIZE_H = 10
+SIZE_W = 18
+SIZE_H = 14
 var root;
 var debug;
 var blocks = new Array();
@@ -9,7 +9,7 @@ var tanks = new Array();
 var dx = new Array(0,-1,0,1);
 var dy = new Array(-1,0,1,0);
 bom = new Array()
-
+MOVECD = 250;
 $(document).ready(function(){
     root = $("#paper");
     draw_block(SIZE_W,SIZE_H);
@@ -93,6 +93,8 @@ function updata(tank){
 }
 
 function move(tank,dir){
+	if ((new Date()).getTime()-tank.tt<MOVECD)return null;
+	tank.tt=(new Date()).getTime();
 	var h=dx[dir];
 	var v=dy[dir];
 	var th,tv;
