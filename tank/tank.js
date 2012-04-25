@@ -1,6 +1,7 @@
 B_WIDTH = 40
 B_HEIGHT = 40
-
+SIZE_W = 15
+SIZE_H = 10
 var root;
 var debug;
 var blocks = new Array();
@@ -11,7 +12,7 @@ bom = new Array()
 
 $(document).ready(function(){
     root = $("#paper");
-    draw_block(15,10);
+    draw_block(SIZE_W,SIZE_H);
     add_tank(0,0,"red");
     add_tank(5,5,"blue");
 /*

@@ -1,5 +1,8 @@
 var bullets = new Array();
 var bulletscount = 1;
+//root.append('<div id="debug"></div>');
+//var debug=$("#debug");
+//debug.html("123");
 function shutting(tank)
 {
 	this_id = "bullet-"+bulletscount;
@@ -26,11 +29,11 @@ function move_bullet(self)
 	self.css("position","absolute").offset(
 		 	{top:offset0.top + self.x,
 			 left:offset0.left + self.y,});
-//	if (self.x<0||self.x>SIZE_H*B_HEITHT||self.y<0||self.y>SIZE_W*B_WIDTH)
+	if (self.x<0||self.x>SIZE_H*B_HEIGHT||self.y<0||self.y>SIZE_W*B_WIDTH)
 	{
-//		$("#"+self.id).remove();
+		$("#"+self.id).remove();
 	}
-//	else
+	else
 	{
 		var t=setTimeout(move_bullet,5,self);
 	}
