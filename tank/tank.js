@@ -23,22 +23,19 @@ $(document).ready(function(){
     add_action("38",function(){move(tanks[0],1)});
     add_action("39",function(){move(tanks[0],2)});
     add_action("40",function(){move(tanks[0],3)});
+    add_action("32",function(){shutting(tanks[0])});
     
     add_action("65",function(){move(tanks[1],0)});
     add_action("87",function(){move(tanks[1],1)});
     add_action("68",function(){move(tanks[1],2)});
     add_action("83",function(){move(tanks[1],3)});
+    add_action("13",function(){shutting(tanks[1])});
 
 })
 
 function draw_block(num_h,num_v){
     var i,j;
     root.width(num_h*B_WIDTH).height(num_v*B_HEIGHT);
-//	root.append('<div id="fordebug"></div>');
-//	debug=$("#fordebug");
-//	debug.offset({
-//	top:422,left:555});
-//	debug.html("123");
     root.offset({"top":(window.innerHeight-num_v*B_HEIGHT)/2,
                 "left":(window.innerWidth-num_h*B_WIDTH)/2});
     offset0 = $("#paper").offset();

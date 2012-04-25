@@ -10,7 +10,9 @@ body,#paper{
     background:#eee;
     border:1px solid silver;
 }
-
+.bullet{
+	background:#000;
+}
 .tank{
     background-color:blue;
 }
