@@ -62,6 +62,7 @@ function add_tank(i,j,col){
 
     root.append('<div class="gun" id="'+this_id+'"></div>');
     var self =$("#"+this_id+".tank");
+    self.tt=(new Date()).getTime();
     self.gun=$("#"+this_id+".gun");
     self.gun.css("position","absolute").offset(
 			{top:offset0.top + i*B_HEIGHT +15,

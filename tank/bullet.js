@@ -1,11 +1,17 @@
 var bullets = new Array();
 var bulletscount = 1;
 SPEED = 3;
+COOLDOWN = 500;
 //root.append('<div id="debug"></div>');
 //var debug=$("#debug");
 //debug.html("123");
 function shutting(tank)
 {
+	dat=new Date();
+	time=dat.getTime();
+	if (time-tank.tt<COOLDOWN)
+		return null;
+	tank.tt=time;
 	this_id = "bullet-"+bulletscount;
 	bulletscount+=1;
 	root.append('<div class="bullet" id="'+this_id+'"></div>');
